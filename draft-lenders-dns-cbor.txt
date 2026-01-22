@@ -2268,7 +2268,9 @@ C.15.  Since draft-lenders-dns-cbor-00
 
 Acknowledgments
 
-   TODO acknowledge.
+   We want to extend special thanks to Christian Amsüss for his input in
+   the brainstorming session that resulted in the current form of name
+   compression.
 
 Contributors
 
@@ -2285,11 +2287,9 @@ Contributors
 
 Authors' Addresses
 
-   Martine Sophie Lenders
-   TUD Dresden University of Technology
-   Helmholtzstr. 10
-   D-01069 Dresden
-   Germany
+
+
+
 
 
 
@@ -2298,6 +2298,11 @@ Lenders, et al.           Expires 26 July 2026                 [Page 41]
 Internet-Draft                  dns+cbor                    January 2026
 
 
+   Martine Sophie Lenders
+   TUD Dresden University of Technology
+   Helmholtzstr. 10
+   D-01069 Dresden
+   Germany
    Email: martine.lenders@tu-dresden.de
 
 
@@ -2321,11 +2326,6 @@ Internet-Draft                  dns+cbor                    January 2026
    D-01069 Dresden
    Germany
    Email: m.waehlisch@tu-dresden.de
-
-
-
-
-
 
 
 
