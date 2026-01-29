@@ -1798,8 +1798,9 @@ To distinguish them from normal standard RRs, they are marked with tag TBD141.<a
 <p id="section-3.2.2-2">Name and record type can be elided as they are always "." and OPT (41), respectively <span>[<a href="#RFC6891" class="cite xref">RFC6891</a>]</span>.<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-3">The UDP payload size may be the first element as an unsigned integer in the array.
 It <span class="bcp14">MUST</span> be elided if its value is the default value of 512, the maximum allowable size for unextended DNS over UDP (see Sections <a href="https://rfc-editor.org/rfc/rfc1035#section-2.3.4" class="relref">2.3.4</a> and <a href="https://rfc-editor.org/rfc/rfc1035#section-4.2.1" class="relref">4.2.1</a> of <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span>).<a href="#section-3.2.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-4">The next element is a map of the options, with the option code (unsigned integer) as key and the option data (byte string) as value.
-The type of option data may be extended in future specifications.<a href="#section-3.2.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-4">The next element is an array of the options as alternating pairs of option code (as unsigned integer) and option data (as byte string).
+The type of the option data may be extended in future specifications.
+As per <span><a href="https://rfc-editor.org/rfc/rfc6891#section-6.1.2" class="relref">Section 6.1.2</a> of [<a href="#RFC6891" class="cite xref">RFC6891</a>]</span>, the order of options is not defined in this specification, but the considerations to order provided in <span><a href="https://rfc-editor.org/rfc/rfc6891#section-6.1.2" class="relref">Section 6.1.2</a> of [<a href="#RFC6891" class="cite xref">RFC6891</a>]</span> also apply here.<a href="#section-3.2.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-5">After that, up to three unsigned integers are following.
 The first being the extended flags as unsigned integer (implied to be 0 if elided),
 the second the extended RCODE as an unsigned integer (implied to be 0 if elided), and
@@ -1814,10 +1815,13 @@ If the RCODE is not elided the extended flags <span class="bcp14">MUST</span> no
 <pre>
 opt-rr = [
   ? udp-payload-size: max-uint16 .default 512,
-  options: {* ocode =&gt; $$odata },
+  options: [* opt-pair ],
   ? opt-rcode-v-flags,
 ]
-ocode = max-uint16
+opt-pair = (
+  ocode: max-uint16,
+  odata: $$odata,
+)
 opt-rcode-v-flags = (
   flags: max-uint16 .default 0,
   ? opt-rcode-v,
